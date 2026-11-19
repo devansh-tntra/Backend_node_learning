@@ -3,6 +3,8 @@
 const express = require("express"); 
 const app = express();
 
+app.use(express.json());
+
 app.post("/tasks", (req, res) => { 
   res.json({ 
     received: req.body 
