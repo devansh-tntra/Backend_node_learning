@@ -30,3 +30,18 @@ WHERE
     AND t.status <> 'done'
 ORDER BY
     t.due_date ASC;
+
+-- Count overdue tasks per project
+SELECT
+    p.id AS project_id,
+    p.name AS project_name,
+    COUNT(t.id) AS overdue_task_count
+FROM Projects p
+INNER JOIN Tasks t
+    ON p.id = t.project_id
+WHERE
+    t.due_date < TRUNC(CURRENT_DATE)
+    AND t.status <> 'done'
+GROUP BY
+    p.id,
+    p.name;
